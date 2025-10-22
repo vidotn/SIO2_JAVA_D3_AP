@@ -17,9 +17,9 @@ import java.io.IOException;
  *
  * @author nathalie
  */
-public class SalleDescription {
+public class PopupSalleDescription {
 
-    public SalleDescription(Stage fenprinc, String nomsalle)
+    public PopupSalleDescription(Stage fenprinc, String nomsalle)
     {
 
         Parent root;
@@ -37,7 +37,7 @@ public class SalleDescription {
         }
         catch (IOException ex)
         {
-          //  Logger.getLogger(SalleDescription.class.getName()).log(Level.SEVERE, null, ex);
+          //  Logger.getLogger(PopupSalleDescription.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

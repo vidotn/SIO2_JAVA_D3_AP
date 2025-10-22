@@ -10,8 +10,8 @@ import java.io.IOException;
 /*import java.util.logging.Level;
 import java.util.logging.Logger;
 */
-public class AjoutIntervention {
-    public AjoutIntervention(Stage fenprinc) {
+public class PopupAjoutIntervention {
+    public PopupAjoutIntervention(Stage fenprinc) {
 
         Parent root;
         try
@@ -28,7 +28,7 @@ public class AjoutIntervention {
         }
         catch (IOException ex)
         {
-          //  Logger.getLogger(SalleDescription.class.getName()).log(Level.SEVERE, null, ex);
+          //  Logger.getLogger(PopupSalleDescription.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

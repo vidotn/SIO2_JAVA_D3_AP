@@ -28,7 +28,7 @@
 
 
         <HBox spacing="100" alignment="CENTER"  minWidth="100" prefHeight="100.0" >
-            <ImageView onMouseClicked="#ajoutClimatiseur" fitWidth="40" preserveRatio="true">
+            <ImageView onMouseClicked="#popupAjoutClimatiseur" fitWidth="40" preserveRatio="true">
                 <image>
                     <Image url="@images/add.png" />
                 </image>

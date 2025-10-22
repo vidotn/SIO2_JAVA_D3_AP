@@ -175,5 +175,50 @@ public class ModelQueries {
         }
     }
 
+    public static void updateClimatiseur(Climatiseur c) throws IOException
+    {
+        try {
+            String apiUrl = API_URL + "climatiseurs/" + c.getId();
 
+            URL url = new URL(apiUrl);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setDoOutput(true);
+            String jsonInputString = new Gson().toJson(c);
+            try (java.io.OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+              int responseCode = conn.getResponseCode();
+
+              System.out.println("Response Code : " + responseCode);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void deleteClimatiseur(Climatiseur selectedItem) {
+        try {
+            String apiUrl = API_URL + "climatiseurs/" + selectedItem.getId();
+
+            URL url = new URL(apiUrl);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("DELETE");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setDoOutput(true);
+
+            int responseCode = conn.getResponseCode();
+
+            System.out.println("Response Code : " + responseCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

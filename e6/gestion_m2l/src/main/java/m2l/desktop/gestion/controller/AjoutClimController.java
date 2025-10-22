@@ -29,7 +29,6 @@ public class AjoutClimController implements Initializable {
 
         System.out.println("Enregistrement du climatiseur .... ");
 
-
         //création d'un nouvel objet
         Climatiseur c = new Climatiseur("marque", "model", 12000);
         //Salle par défaut
@@ -39,8 +38,7 @@ public class AjoutClimController implements Initializable {
 
         ModelQueries.insertClimatiseurViaApi(c);
 
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.close();
+        fermerFenetre(event);
 
     }
 
@@ -49,13 +47,6 @@ public class AjoutClimController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }
-
-
-    public void retourListe(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        stage.close();
-    }
-
 
     public void fermerFenetre(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

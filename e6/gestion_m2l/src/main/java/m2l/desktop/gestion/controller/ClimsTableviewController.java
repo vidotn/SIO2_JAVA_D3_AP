@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -60,58 +61,55 @@ public class ClimsTableviewController implements Initializable {
 
 
         try {
-            configureOngletClimatiseurs();
+            System.out.println("Chargement des climatiseurs dans le tableView...");
+
+
+            liste_des_climatiseurs = ModelQueries.getClimatiseursFromApi();
+
+            // Afficher les objets Personne
+            for (Climatiseur c : liste_des_climatiseurs) {
+                System.out.println(c);
+            }
+
+            //le  tableview sera éditable
+            tableviewClimatiseurs.setEditable(true);
+
+            //la marque pourra être modifiée
+            //dans le tableview en double-cliquant dessus
+            modeleCol.setEditable(true);
+            modeleCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+            //mise en correspondance de la colonne "modeleCol" du tableview
+            //avec la propriété "modele" de la classe Climatiseur
+            modeleCol.setCellValueFactory(cell -> cell.getValue().modeleProperty());
+
+            //mise en correspondance de la colonne "marqueCol" du tableview
+            //avec la propriété "marque" de la classe Climatiseur
+            marqueCol.setCellValueFactory(cell -> cell.getValue().marqueProperty());
+
+            //mise en correspondance de la colonne "salleCol" du tableview
+            //avec la propriété "nom" de la salle de la classe Intervention
+            salleCol.setCellValueFactory(cell -> cell.getValue().getSalle().nomProperty());
+
+            //mise en correspondance de la colonne "intervenantCol" du tableview
+            //avec la concaténation "prénom nom" de l'intervenant de la classe Intervention
+            batimentCol.setCellValueFactory(cell -> cell.getValue().getSalle().batimentProperty());
+
+            //création de la liste qui correspondra au contenu
+            //du tableview
+            donnees_climatiseurs = FXCollections.observableList(liste_des_climatiseurs);
+            //mise en correspondance de la liste "donneesIntJour"
+            //avec le tableview "todayInt"
+            tableviewClimatiseurs.setItems(donnees_climatiseurs);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    private void configureOngletClimatiseurs() throws IOException {
-
-        System.out.println("Chargement des climatiseurs dans le tableView...");
-
-
-        liste_des_climatiseurs = ModelQueries.getClimatiseursFromApi();
-
-        // Afficher les objets Personne
-        for (Climatiseur c : liste_des_climatiseurs) {
-            System.out.println(c);
-        }
-
-        //la marque pourra être modifiée
-        //dans le tableview en double-cliquant dessus
-        modeleCol.setEditable(true);
-        modeleCol.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        //mise en correspondance de la colonne "modeleCol" du tableview
-        //avec la propriété "modele" de la classe Climatiseur
-        modeleCol.setCellValueFactory(cell -> cell.getValue().modeleProperty());
-
-        //mise en correspondance de la colonne "marqueCol" du tableview
-        //avec la propriété "marque" de la classe Climatiseur
-        marqueCol.setCellValueFactory(cell -> cell.getValue().marqueProperty());
-
-        //mise en correspondance de la colonne "salleCol" du tableview
-        //avec la propriété "nom" de la salle de la classe Intervention
-        salleCol.setCellValueFactory(cell -> cell.getValue().getSalle().nomProperty());
-
-        //mise en correspondance de la colonne "intervenantCol" du tableview
-        //avec la concaténation "prénom nom" de l'intervenant de la classe Intervention
-        batimentCol.setCellValueFactory(cell -> cell.getValue().getSalle().batimentProperty());
-
-        //création de la liste qui correspondra au contenu
-        //du tableview
-        donnees_climatiseurs = FXCollections.observableList(liste_des_climatiseurs);
-        //mise en correspondance de la liste "donneesIntJour"
-        //avec le tableview "todayInt"
-        tableviewClimatiseurs.setItems(donnees_climatiseurs);
-
-
-    }
-
     @FXML
-    public void ajoutClimatiseur(MouseEvent mouseEvent) throws IOException {
+    public void popupAjoutClimatiseur(MouseEvent mouseEvent) throws IOException {
 
 
         Stage stage_ajout = new Stage();
@@ -136,6 +134,9 @@ public class ClimsTableviewController implements Initializable {
 
         System.out.println("Suppression du climatiseur : " + selectedItem);
 
+        ModelQueries.deleteClimatiseur(selectedItem);
+        ClimsTableviewController.getListeClimatiseurs().remove(selectedItem);
+
     }
 
     public void modificationClimatiseur(TableColumn.CellEditEvent cellEditEvent) throws IOException {
@@ -144,9 +145,9 @@ public class ClimsTableviewController implements Initializable {
                 + " = " + cellEditEvent.getNewValue().toString());
 
         Climatiseur c = tableviewClimatiseurs.getSelectionModel().getSelectedItem();
-        c.setMarque(cellEditEvent.getNewValue().toString());
+        c.setModele(cellEditEvent.getNewValue().toString());
         //Mettre à jour dans la BDD
-        // Tools.updateClimatiseur(c);
+         ModelQueries.updateClimatiseur(c);
 
     }
 

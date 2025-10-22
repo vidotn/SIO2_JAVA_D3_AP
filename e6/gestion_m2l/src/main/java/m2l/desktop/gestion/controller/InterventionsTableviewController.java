@@ -11,13 +11,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import m2l.desktop.gestion.AjoutIntervention;
+import m2l.desktop.gestion.PopupAjoutIntervention;
 import m2l.desktop.gestion.model.Intervention;
-import m2l.desktop.gestion.model.Tools;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -115,7 +112,7 @@ public class InterventionsTableviewController implements Initializable {
     public void ajoutIntervention(MouseEvent mouseEvent) {
         Scene scene = (Scene) ((ImageView) mouseEvent.getSource()).getScene();
         Stage stage = (Stage) scene.getWindow();
-        new AjoutIntervention(stage);
+        new PopupAjoutIntervention(stage);
     }
 
 }

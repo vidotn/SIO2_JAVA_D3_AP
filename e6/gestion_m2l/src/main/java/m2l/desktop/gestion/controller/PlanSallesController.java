@@ -19,16 +19,11 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import m2l.desktop.gestion.SalleDescription;
+import m2l.desktop.gestion.PopupSalleDescription;
 import m2l.desktop.gestion.model.ModelQueries;
 import m2l.desktop.gestion.model.PlanSalle;
 import m2l.desktop.gestion.model.Salle;
-import m2l.desktop.gestion.model.Tools;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -350,7 +345,7 @@ public class PlanSallesController implements Initializable {
                 Scene scene = (Scene) ((Circle) e.getSource()).getScene();
                 Stage stage = (Stage) scene.getWindow();
 
-                new SalleDescription(stage, nomsalle);
+                new PopupSalleDescription(stage, nomsalle);
             }
         });
     }
