@@ -64,52 +64,7 @@ public class PlanSallesController implements Initializable {
 
         this.pins = new Group();
 
-        initialiserBatimentD();
-        initialiserBatimentC();
-        initialiserBatimentB();
-        initialiserBatimentA();
-        initialiserHallAccueil();
-
-        for (int i = 0; i < this.listePlanSalles.size(); i++) {
-
-            Circle c = new Circle((int) (this.listePlanSalles.get(i).r.getX() + this.listePlanSalles.get(i).r.getWidth() / 2), (int) (this.listePlanSalles.get(i).r.getY() + this.listePlanSalles.get(i).r.getHeight() / 2), 10);
-            c.setFill(Paint.valueOf("CF2140"));
-            c.setId("" + i);
-
-            ajouterGestionEvenement(c);
-
-            this.pins.getChildren().add(c);
-
-            this.listePlanSalles.get(i).r.setFill(Paint.valueOf("D8EAF5"));
-            this.listePlanSalles.get(i).r.setStroke(Paint.valueOf("5672F5"));
-            //this.listeSalles.get(i)
-
-            switch (this.listePlanSalles.get(i).getSalle().getBatiment()) {
-                case "D":
-                    this.batimentD.getChildren().add(this.listePlanSalles.get(i).r);
-                    break;
-                case "C":
-                    this.batimentC.getChildren().add(this.listePlanSalles.get(i).r);
-                    break;
-                case "B":
-                    this.batimentB.getChildren().add(this.listePlanSalles.get(i).r);
-                    break;
-                case "A":
-                    this.batimentA.getChildren().add(this.listePlanSalles.get(i).r);
-                    break;
-                case "H":
-                    this.HallAccueil.getChildren().add(this.listePlanSalles.get(i).r);
-                    break;
-
-            }
-        }
-
-        if(batimentD!=null)  this.zonePlan.getChildren().add(batimentD);
-        if(batimentC!=null) this.zonePlan.getChildren().add(batimentC);
-        if(batimentB!=null) this.zonePlan.getChildren().add(batimentB);
-        if(batimentA!=null) this.zonePlan.getChildren().add(batimentA);
-        if(HallAccueil!=null) this.zonePlan.getChildren().add(HallAccueil);
-        if(pins!=null) this.zonePlan.getChildren().add(pins);
+        afficherRezDeChaussee();
 
     }
 
@@ -350,19 +305,79 @@ public class PlanSallesController implements Initializable {
         });
     }
 
-    @FXML
-    public void affichePlanBatA() {
-        this.zonePlan.getChildren().clear();
-    }
+    public void afficherRezDeChaussee() {
 
-    @FXML
-    public void affichePlanGlobal() {
+        if(this.batimentD!=null) this.batimentD.getChildren().clear();
+        if(this.batimentC!=null) this.batimentC.getChildren().clear();
+        if(this.batimentB!=null) this.batimentB.getChildren().clear();
+        if(this.batimentA!=null) this.batimentA.getChildren().clear();
+        if(this.HallAccueil!=null) this.HallAccueil.getChildren().clear();
+        if(this.pins!=null) this.pins.getChildren().clear();
+        if(this.zonePlan!=null) this.zonePlan.getChildren().clear();
+        this.listePlanSalles.clear();
+
+        initialiserBatimentD();
+        initialiserBatimentC();
+        initialiserBatimentB();
+        initialiserBatimentA();
+        initialiserHallAccueil();
+
+        configurerPinsSalles();
+
         if (!this.zonePlan.getChildren().contains(batimentD)) this.zonePlan.getChildren().add(batimentD);
         if (!this.zonePlan.getChildren().contains(batimentC)) this.zonePlan.getChildren().add(batimentC);
         if (!this.zonePlan.getChildren().contains(batimentB)) this.zonePlan.getChildren().add(batimentB);
         if (!this.zonePlan.getChildren().contains(batimentA)) this.zonePlan.getChildren().add(batimentA);
         if (!this.zonePlan.getChildren().contains(HallAccueil)) this.zonePlan.getChildren().add(HallAccueil);
         if (!this.zonePlan.getChildren().contains(pins)) this.zonePlan.getChildren().add(pins);
+    }
+
+    @FXML
+    public void affichePlanBatA() {
+        if(this.batimentD!=null) this.batimentD.getChildren().clear();
+        if(this.batimentC!=null) this.batimentC.getChildren().clear();
+        if(this.batimentB!=null) this.batimentB.getChildren().clear();
+        if(this.batimentA!=null) this.batimentA.getChildren().clear();
+        if(this.HallAccueil!=null) this.HallAccueil.getChildren().clear();
+        if(this.pins!=null) this.pins.getChildren().clear();
+        if(this.zonePlan!=null) this.zonePlan.getChildren().clear();
+        this.listePlanSalles.clear();
+    }
+
+    private void configurerPinsSalles() {
+        for (int i = 0; i < this.listePlanSalles.size(); i++) {
+
+            Circle c = new Circle((int) (this.listePlanSalles.get(i).r.getX() + this.listePlanSalles.get(i).r.getWidth() / 2), (int) (this.listePlanSalles.get(i).r.getY() + this.listePlanSalles.get(i).r.getHeight() / 2), 10);
+            c.setFill(Paint.valueOf("CF2140"));
+            c.setId("" + i);
+
+            ajouterGestionEvenement(c);
+
+            this.pins.getChildren().add(c);
+
+            this.listePlanSalles.get(i).r.setFill(Paint.valueOf("D8EAF5"));
+            this.listePlanSalles.get(i).r.setStroke(Paint.valueOf("5672F5"));
+            //this.listeSalles.get(i)
+
+            switch (this.listePlanSalles.get(i).getSalle().getBatiment()) {
+                case "D":
+                    this.batimentD.getChildren().add(this.listePlanSalles.get(i).r);
+                    break;
+                case "C":
+                    this.batimentC.getChildren().add(this.listePlanSalles.get(i).r);
+                    break;
+                case "B":
+                    this.batimentB.getChildren().add(this.listePlanSalles.get(i).r);
+                    break;
+                case "A":
+                    this.batimentA.getChildren().add(this.listePlanSalles.get(i).r);
+                    break;
+                case "H":
+                    this.HallAccueil.getChildren().add(this.listePlanSalles.get(i).r);
+                    break;
+
+            }
+        }
     }
 
 }

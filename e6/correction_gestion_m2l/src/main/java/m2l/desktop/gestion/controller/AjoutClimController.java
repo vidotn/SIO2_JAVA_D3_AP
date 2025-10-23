@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import m2l.desktop.gestion.model.Climatiseur;
+import m2l.desktop.gestion.model.Marque;
 import m2l.desktop.gestion.model.ModelQueries;
 import m2l.desktop.gestion.model.Tools;
 
@@ -30,7 +31,10 @@ public class AjoutClimController implements Initializable {
         System.out.println("Enregistrement du climatiseur .... ");
 
         //création d'un nouvel objet
-        Climatiseur c = new Climatiseur("marque", "model", 12000);
+        Climatiseur c = new Climatiseur("model",12000);
+
+        c.setMarque(ModelQueries.getMarqueById(1));//Marque par défaut
+
         //Salle par défaut
         c.setSalle(ModelQueries.getSalleById(14));
         //Ajout du climatiseur dans la liste des climatiseurs affichée

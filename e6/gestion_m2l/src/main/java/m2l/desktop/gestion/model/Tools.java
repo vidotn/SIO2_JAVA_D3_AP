@@ -1,13 +1,16 @@
 package m2l.desktop.gestion.model;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import javafx.scene.control.TableView;
+import m2l.desktop.gestion.LocalDateTimeAdapter;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,11 +41,15 @@ public class Tools
 
         List<Intervention> liste = new ArrayList<>();
 
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .create();
+
         try (JsonReader reader = new JsonReader(new StringReader(jsonResponse))) {
             //reader.setLenient(true);
             reader.beginArray(); // Commence à lire le tableau JSON
             while (reader.hasNext()) {
-                Intervention objet = new Gson().fromJson(reader, Intervention.class);
+                Intervention objet = gson.fromJson(reader, Intervention.class);
                 liste.add(objet);
             }
             reader.endArray(); // Fin du tableau JSON

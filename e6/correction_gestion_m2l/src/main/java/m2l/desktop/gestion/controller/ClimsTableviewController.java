@@ -84,7 +84,7 @@ public class ClimsTableviewController implements Initializable {
 
             //mise en correspondance de la colonne "marqueCol" du tableview
             //avec la propriété "marque" de la classe Climatiseur
-            marqueCol.setCellValueFactory(cell -> cell.getValue().marqueProperty());
+            marqueCol.setCellValueFactory(cell -> cell.getValue().getMarque().nomProperty());
 
             //mise en correspondance de la colonne "salleCol" du tableview
             //avec la propriété "nom" de la salle de la classe Intervention

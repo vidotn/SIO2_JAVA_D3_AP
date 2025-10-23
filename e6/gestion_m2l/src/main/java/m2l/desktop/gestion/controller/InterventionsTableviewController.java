@@ -37,7 +37,8 @@ public class InterventionsTableviewController implements Initializable {
     @FXML
     public TableColumn<Intervention, String> motifCol;
     @FXML
-    public TableColumn<Intervention, String> dateCol;
+    public TableColumn<Intervention, String> dateHeureCol;
+
 
     @FXML
     public TableView<Intervention> tableviewInterventions;
@@ -86,10 +87,11 @@ public class InterventionsTableviewController implements Initializable {
 
         //mise en correspondance de la colonne "dateCol" du tableview
         //avec la propriété "date" de la salle de la classe Intervention
-        dateCol.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+        dateHeureCol.setCellValueFactory(cell -> cell.getValue().getDateProperty());
         //mise en correspondance de la colonne "motifCol" du tableview
         //avec la propriété "motif" de la salle de la classe Intervention
         motifCol.setCellValueFactory(cell -> cell.getValue().motifProperty());
+
 
         //mise en correspondance de la colonne "salleCol" du tableview
         //avec la propriété "nom" de la salle de la classe Intervention
@@ -102,6 +104,10 @@ public class InterventionsTableviewController implements Initializable {
         //mise en correspondance de la colonne "contactcol" du tableview
         //avec la propriété "telephone" de l'intervention de la classe Intervention
         contactCol.setCellValueFactory(cell -> cell.getValue().getIntervenant().telephoneProperty());
+
+        //mise en correspondance de la colonne "dateHeureCol" du tableview
+        //avec la propriété "date_heure" de la salle de la classe Intervention
+        dateHeureCol.setCellValueFactory(cell -> cell.getValue().getDateProperty());
 
         //création de la liste qui correspondra au contenu
         //du tableview

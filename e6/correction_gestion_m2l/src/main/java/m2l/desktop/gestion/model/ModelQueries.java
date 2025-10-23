@@ -1,11 +1,14 @@
 package m2l.desktop.gestion.model;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import m2l.desktop.gestion.LocalDateTimeAdapter;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,13 +61,15 @@ public class ModelQueries {
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("PUT");
-            //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
 
             conn.setRequestProperty("Content-Type", "application/json; utf-8");
             conn.setDoOutput(true);
 
-            String jsonInputString = new Gson().toJson(interventionSelectionnee);
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                    .create();
+
+            String jsonInputString = gson.toJson(interventionSelectionnee);
             try (java.io.OutputStream os = conn.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes("utf-8");
                 os.write(input, 0, input.length);
@@ -176,6 +181,8 @@ public class ModelQueries {
         URL url = new URL(apiUrl);
         List<Climatiseur> liste_des_climatiseurs = new ArrayList<>();
 
+        System.out.println("ModelQueries : Connexion à l'API Climatiseurs à l'URL : " + apiUrl);
+
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Accept", "application/json");
@@ -201,6 +208,8 @@ public class ModelQueries {
         try {
             String apiUrl = API_URL + "climatiseurs";
 
+            System.out.println("Insertion du climatiseur via l'API à l'URL : " + apiUrl);
+
             URL url = new URL(apiUrl);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -208,6 +217,9 @@ public class ModelQueries {
             conn.setRequestProperty("Content-Type", "application/json; utf-8");
             conn.setDoOutput(true);
             String jsonInputString = new Gson().toJson(c);
+
+            System.out.println("Insertion du climatiseur via l'API : " + jsonInputString);
+
 
             try (java.io.OutputStream os = conn.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes("utf-8");
@@ -218,7 +230,7 @@ public class ModelQueries {
 
             int responseCode = conn.getResponseCode();
 
-            System.out.println("Response Code : " + responseCode);
+            System.out.println("Response Code : " + responseCode+ " - Response Message : " + conn.getResponseMessage());
 
             conn.disconnect();
         } catch (Exception e) {
@@ -278,4 +290,40 @@ public class ModelQueries {
     }
 
 
+    public static Marque getMarqueById(int id) throws IOException {
+
+        String apiUrl = API_URL + "marques/" + id;
+
+        System.out.println("ModelQueries - getMarqueById : API URL : " + apiUrl);
+
+        URL url = null;
+        Marque marque = null;
+
+        try {
+            url = new URL(apiUrl);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+
+            if (conn.getResponseCode() == 200) {
+                String jsonResponse = Tools.convertInputStreamToString(conn.getInputStream());
+                System.out.println("ModelQueries - getMArqueById : JSON Response : " + jsonResponse);
+                marque = new Gson().fromJson(jsonResponse, Marque.class);
+
+            }
+
+            conn.disconnect();
+        } catch (ProtocolException e) {
+            throw new RuntimeException(e);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("ModelQueries - getMarqueById : Marque récupérée : " + marque);
+
+        return marque;
+    }
 }

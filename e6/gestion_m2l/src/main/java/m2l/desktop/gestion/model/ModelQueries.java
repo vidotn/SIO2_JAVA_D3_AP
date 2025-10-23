@@ -161,6 +161,8 @@ public class ModelQueries {
             conn.setDoOutput(true);
             String jsonInputString = new Gson().toJson(c);
 
+            System.out.println("Insertion du climatiseur via l'API : " + jsonInputString);
+
             try (java.io.OutputStream os = conn.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes("utf-8");
                 os.write(input, 0, input.length);

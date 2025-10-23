@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package m2l.desktop.gestion.model;
 
-//import java.sql.Date;
-
-import com.google.gson.annotations.Expose;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -20,25 +11,28 @@ import java.util.Date;
  */
 public class Intervention {
     private int id_intervention;
-    private int numSalle;
-    private int numIntervenant;
-    private Date date;
-    private String heure;
+    private int num_salle;
+    private int num_intervenant;
+    private LocalDateTime date_heure ;
     private String motif;
 
     private Intervenant intervenant;
 
     private Salle salle;
 
-    public Intervention(int id_intervention, String motif, Date date, String heure, int numIntervenant, int numSalle, Salle salle, Intervenant intervenant) {
+    public Intervention(int id_intervention, String motif, LocalDateTime  date ,int num_intervenant, int num_salle, Salle salle, Intervenant intervenant) {
         this.id_intervention = id_intervention;
         this.motif = motif;
-        this.date = date;
-        this.heure = heure;
-        this.numIntervenant = numIntervenant;
-        this.numSalle = numSalle;
+        this.date_heure  = date ;
+        this.num_intervenant = num_intervenant;
+        this.num_salle = num_salle;
         this.salle = salle;
         this.intervenant = intervenant;
+
+    }
+
+    public Intervention(String motif) {
+        this.motif = motif;
     }
 
     public int getId_intervention() {
@@ -49,36 +43,28 @@ public class Intervention {
         this.id_intervention = id_intervention;
     }
 
-    public int getNumSalle() {
-        return numSalle;
+    public int getnum_salle() {
+        return num_salle;
     }
 
-    public void setNumSalle(int numSalle) {
-        this.numSalle = numSalle;
+    public void setnum_salle(int num_salle) {
+        this.num_salle = num_salle;
     }
 
-    public int getNumIntervenant() {
-        return numIntervenant;
+    public int getnum_intervenant() {
+        return num_intervenant;
     }
 
-    public void setNumIntervenant(int numIntervenant) {
-        this.numIntervenant = numIntervenant;
+    public void setnum_intervenant(int num_intervenant) {
+        this.num_intervenant = num_intervenant;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDateTime getDate_heure() {
+        return date_heure;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getHeure() {
-        return heure;
-    }
-
-    public void setHeure(String heure) {
-        this.heure = heure;
+    public void setDate_heure(LocalDateTime date_heure) {
+        this.date_heure = date_heure;
     }
 
     public String getMotif() {
@@ -106,7 +92,7 @@ public class Intervention {
     }
 
     public String toString() {
-        return "Intervention n°" + this.id_intervention + " le " + this.date + " à " + this.heure + " pour le motif : " + this.motif +
+        return "Intervention n°" + this.id_intervention + " le " + this.date_heure  + " pour le motif : " + this.motif +
                 "\n-- " + this.salle.toString() + "\n-- " + this.intervenant.toString();
     }
 
@@ -114,16 +100,7 @@ public class Intervention {
     //Les propriétés pour la TableView
     public SimpleStringProperty getDateProperty() {
 
-        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String la_date = f.format(this.date);
-
-        return new SimpleStringProperty(la_date);
-    }
-
-    public SimpleStringProperty getHeureProperty() {
-
-        return new SimpleStringProperty(this.heure);
-
+        return new SimpleStringProperty(date_heure .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
     }
 
     public SimpleStringProperty getMotifProperty() {

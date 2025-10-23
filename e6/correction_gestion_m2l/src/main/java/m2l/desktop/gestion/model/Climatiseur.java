@@ -11,18 +11,16 @@ public class Climatiseur {
 
     private int id;
     private String modele;
-    private String marque;
     private int  puissance;
     private int surface_min;
     private int  surface_max;
-    private int numsalle;
 
+    private Marque marque;
     private Salle salle;
 
 
-    public Climatiseur(Salle salle, int numsalle, int surface_max, int surface_min, int puissance, String marque, String modele, int id) {
+    public Climatiseur(int id,Salle salle,  int surface_max, int surface_min, int puissance, Marque marque, String modele) {
         this.salle = salle;
-        this.numsalle = numsalle;
         this.surface_max = surface_max;
         this.surface_min = surface_min;
         this.puissance = puissance;
@@ -31,7 +29,7 @@ public class Climatiseur {
         this.id = id;
     }
 
-    public Climatiseur(String marque, String modele, int puissance) {
+    public Climatiseur(Marque marque, String modele, int puissance) {
         this.puissance =puissance;
         this.marque = marque;
         this.modele = modele;
@@ -42,13 +40,18 @@ public class Climatiseur {
 
     }
 
-    public Climatiseur(int i,String mar, String mod, int pui, int smi, int sma) {
+    public Climatiseur(int i,Marque mar, String mod, int pui, int smi, int sma) {
         this.setMarque( mar);
         this.setModele( mod);
         this.setPuissance(pui);
         this.setSurface_max(sma);
         this.setSurface_min(smi);
         this.id = i;
+    }
+
+    public Climatiseur(String mod, int pui) {
+        this.setModele( mod);
+        this.setPuissance(pui);
     }
 
     public int getSurfaceMaxCouverte() {
@@ -143,11 +146,11 @@ public class Climatiseur {
         this.modele = modele;
     }
 
-    public String getMarque() {
+    public Marque getMarque() {
         return marque;
     }
 
-    public void setMarque(String marque) {
+    public void setMarque(Marque marque) {
         this.marque = marque;
     }
 
@@ -175,15 +178,6 @@ public class Climatiseur {
         this.surface_max = surface_max;
     }
 
-
-    public int getNumsalle() {
-        return numsalle;
-    }
-
-    public void setNumsalle(int numsalle) {
-        this.numsalle = numsalle;
-    }
-
     public Salle getSalle() {
         return salle;
     }
@@ -201,10 +195,6 @@ public class Climatiseur {
         return new SimpleIntegerProperty(id);
     }
 
-    public SimpleIntegerProperty numsalleProperty() {
-        return new SimpleIntegerProperty(numsalle);
-    }
-
     public SimpleIntegerProperty surface_minProperty() {
         return new SimpleIntegerProperty(surface_min);
     }
@@ -214,7 +204,7 @@ public class Climatiseur {
     }
 
     public SimpleStringProperty marqueProperty() {
-        return new SimpleStringProperty(marque);
+        return new SimpleStringProperty(marque.getNom_marque());
     }
 
     public SimpleStringProperty modeleProperty() {
@@ -230,8 +220,8 @@ public class Climatiseur {
                 ", puissance=" + puissance +
                 ", surface_min=" + surface_min +
                 ", surface_max=" + surface_max +
-                ", numsalle=" + numsalle +
                 ", salle=" + salle.toString() +
+                ", marque=" + marque.toString() +
                 '}';
     }
 }

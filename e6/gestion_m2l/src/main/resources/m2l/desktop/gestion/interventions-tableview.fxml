@@ -30,7 +30,7 @@
                     <TableColumn fx:id="salleCol" prefWidth="150" text="Salle"/>
                     <TableColumn fx:id="intervenantCol" prefWidth="150.0" text="Intervenant"/>
                     <TableColumn fx:id="contactCol" prefWidth="150" text="Contact"/>
-                    <TableColumn fx:id="dateCol" prefWidth="150" text="Date"/>
+                    <TableColumn fx:id="dateHeureCol" prefWidth="150" text="Date Heure"/>
                 </columns>
             </TableView>
 

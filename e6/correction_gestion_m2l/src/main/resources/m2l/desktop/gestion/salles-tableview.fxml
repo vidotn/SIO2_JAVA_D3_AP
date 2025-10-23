@@ -32,7 +32,7 @@
       fx:controller="m2l.desktop.gestion.controller.SallesTableviewController">
     <children>
 
-        <VBox stylesheets="style.css">
+        <VBox stylesheets="@style.css">
 
             <HBox style="fx-background-color:black" alignment="CENTER">
                 <Label fx:id="dateJour" minHeight="16" minWidth="100" prefHeight="100.0"

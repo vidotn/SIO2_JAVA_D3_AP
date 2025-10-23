@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package m2l.desktop.gestion.model;
 
-//import java.sql.Date ;
-
-import com.google.gson.annotations.Expose;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 
 /**
@@ -22,8 +11,8 @@ import java.util.Date;
  */
 public class Intervention {
     private int id_intervention;
-    private int numSalle;
-    private int numIntervenant;
+    private int num_salle;
+    private int num_intervenant;
     private LocalDateTime date_heure ;
     private String motif;
 
@@ -31,12 +20,12 @@ public class Intervention {
 
     private Salle salle;
 
-    public Intervention(int id_intervention, String motif, LocalDateTime  date ,int numIntervenant, int numSalle, Salle salle, Intervenant intervenant) {
+    public Intervention(int id_intervention, String motif, LocalDateTime  date ,int num_intervenant, int num_salle, Salle salle, Intervenant intervenant) {
         this.id_intervention = id_intervention;
         this.motif = motif;
         this.date_heure  = date ;
-        this.numIntervenant = numIntervenant;
-        this.numSalle = numSalle;
+        this.num_intervenant = num_intervenant;
+        this.num_salle = num_salle;
         this.salle = salle;
         this.intervenant = intervenant;
 
@@ -54,20 +43,20 @@ public class Intervention {
         this.id_intervention = id_intervention;
     }
 
-    public int getNumSalle() {
-        return numSalle;
+    public int getnum_salle() {
+        return num_salle;
     }
 
-    public void setNumSalle(int numSalle) {
-        this.numSalle = numSalle;
+    public void setnum_salle(int num_salle) {
+        this.num_salle = num_salle;
     }
 
-    public int getNumIntervenant() {
-        return numIntervenant;
+    public int getnum_intervenant() {
+        return num_intervenant;
     }
 
-    public void setNumIntervenant(int numIntervenant) {
-        this.numIntervenant = numIntervenant;
+    public void setnum_intervenant(int num_intervenant) {
+        this.num_intervenant = num_intervenant;
     }
 
     public LocalDateTime getDate_heure() {
@@ -111,13 +100,8 @@ public class Intervention {
     //Les propriétés pour la TableView
     public SimpleStringProperty getDateProperty() {
 
-    //  SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-      //String la_Date  = f.format(this.date_heure );
-
         return new SimpleStringProperty(date_heure .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
     }
-
-
 
     public SimpleStringProperty getMotifProperty() {
 

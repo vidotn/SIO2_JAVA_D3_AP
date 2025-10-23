@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import m2l.desktop.gestion.model.ModelQueries;
 import m2l.desktop.gestion.PopupModificationIntervention;
 
@@ -81,10 +82,10 @@ public class InterventionsTableviewController implements Initializable {
 
         liste_des_interventions = ModelQueries.getInterventionsFromApi();
 
-            // Afficher les objets Personne
-            for (Intervention p : liste_des_interventions) {
-                System.out.println(p);
-            }
+        // Afficher les objets Personne
+        for (Intervention p : liste_des_interventions) {
+            System.out.println(p);
+        }
 
         /****************************** SITUATION PROFESSIONNELLE  B ******************************
 
@@ -110,33 +111,35 @@ public class InterventionsTableviewController implements Initializable {
 
         /***************************************************************************************************/
 
-            //mise en correspondance de la colonne "motifCol" du tableview
-            //avec la propriété "motif" de la salle de la classe Intervention
-            motifCol.setCellValueFactory(cell -> cell.getValue().motifProperty());
-            motifCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        //mise en correspondance de la colonne "motifCol" du tableview
+        //avec la propriété "motif" de la salle de la classe Intervention
+        motifCol.setCellValueFactory(cell -> cell.getValue().motifProperty());
+        motifCol.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
+        //mise en correspondance de la colonne "salleCol" du tableview
+        //avec la propriété "nom" de la salle de la classe Intervention
+        salleCol.setCellValueFactory(cell -> cell.getValue().getSalle().nomProperty());
 
-            //mise en correspondance de la colonne "salleCol" du tableview
-            //avec la propriété "nom" de la salle de la classe Intervention
-            salleCol.setCellValueFactory(cell -> cell.getValue().getSalle().nomProperty());
 
-            dateHeureCol.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+        //mise en correspondance de la colonne "intervenantCol" du tableview
+        //avec la concaténation "prénom nom" de l'intervenant de la classe Intervention
+        intervenantCol.setCellValueFactory(cell -> cell.getValue().getIntervenant().prenomProperty().concat(" ").concat(cell.getValue().getIntervenant().nomProperty()));
 
-            //mise en correspondance de la colonne "intervenantCol" du tableview
-            //avec la concaténation "prénom nom" de l'intervenant de la classe Intervention
-            intervenantCol.setCellValueFactory(cell -> cell.getValue().getIntervenant().prenomProperty().concat(" ").concat(cell.getValue().getIntervenant().nomProperty()));
+        //mise en correspondance de la colonne "contactcol" du tableview
+        //avec la propriété "telephone" de l'intervention de la classe Intervention
+        contactCol.setCellValueFactory(cell -> cell.getValue().getIntervenant().telephoneProperty());
 
-            //mise en correspondance de la colonne "contactcol" du tableview
-            //avec la propriété "telephone" de l'intervention de la classe Intervention
-            contactCol.setCellValueFactory(cell -> cell.getValue().getIntervenant().telephoneProperty());
+        //mise en correspondance de la colonne "dateHeureCol" du tableview
+        //avec la propriété "date_heure" de la salle de la classe Intervention
+        dateHeureCol.setCellValueFactory(cell -> cell.getValue().getDateProperty());
 
-            //création de la liste qui correspondra au contenu
-            //du tableview
-            donnees_interventions = FXCollections.observableList(liste_des_interventions);
-            //mise en correspondance de la liste "donneesIntJour"
-            //avec le tableview "todayInt"
-            tableviewInterventions.setItems(donnees_interventions);
+        //création de la liste qui correspondra au contenu
+        //du tableview
+        donnees_interventions = FXCollections.observableList(liste_des_interventions);
+        //mise en correspondance de la liste "donneesIntJour"
+        //avec le tableview "todayInt"
+        tableviewInterventions.setItems(donnees_interventions);
 
 
     }
@@ -146,7 +149,6 @@ public class InterventionsTableviewController implements Initializable {
         Stage stage = (Stage) scene.getWindow();
         new PopupAjoutIntervention(stage);
     }
-
 
 
     /****************************** SITUATION PROFESSIONNELLE  B ******************************
@@ -178,7 +180,7 @@ public class InterventionsTableviewController implements Initializable {
         Intervention i = tableviewInterventions.getSelectionModel().getSelectedItem();
         i.setMotif(interventionStringCellEditEvent.getNewValue().toString());
 
-            ModelQueries.updateInterventionViaApi(i);
+        ModelQueries.updateInterventionViaApi(i);
 
     }
 }

@@ -15,14 +15,12 @@ public class Climatiseur {
     private int  puissance;
     private int surface_min;
     private int  surface_max;
-    private int numsalle;
 
     private Salle salle;
 
 
-    public Climatiseur(Salle salle, int numsalle, int surface_max, int surface_min, int puissance, String marque, String modele, int id) {
+    public Climatiseur(Salle salle, int surface_max, int surface_min, int puissance, String marque, String modele, int id) {
         this.salle = salle;
-        this.numsalle = numsalle;
         this.surface_max = surface_max;
         this.surface_min = surface_min;
         this.puissance = puissance;
@@ -172,15 +170,6 @@ public class Climatiseur {
         this.surface_max = surface_max;
     }
 
-
-    public int getNumsalle() {
-        return numsalle;
-    }
-
-    public void setNumsalle(int numsalle) {
-        this.numsalle = numsalle;
-    }
-
     public Salle getSalle() {
         return salle;
     }
@@ -196,10 +185,6 @@ public class Climatiseur {
 
     public SimpleIntegerProperty idProperty() {
         return new SimpleIntegerProperty(id);
-    }
-
-    public SimpleIntegerProperty numsalleProperty() {
-        return new SimpleIntegerProperty(numsalle);
     }
 
     public SimpleIntegerProperty surface_minProperty() {
@@ -227,7 +212,6 @@ public class Climatiseur {
                 ", puissance=" + puissance +
                 ", surface_min=" + surface_min +
                 ", surface_max=" + surface_max +
-                ", numsalle=" + numsalle +
                 ", salle=" + salle.toString() +
                 '}';
     }
