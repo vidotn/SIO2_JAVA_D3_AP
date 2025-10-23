@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import m2l.desktop.gestion.model.ModelQueries;
 
 public class InterventionsTableviewController implements Initializable {
@@ -39,7 +40,7 @@ public class InterventionsTableviewController implements Initializable {
     public TableColumn<Intervention, String> dateCol;
 
     @FXML
-    public TableView tableviewInterventions;
+    public TableView<Intervention> tableviewInterventions;
 
 
     @FXML
@@ -78,33 +79,36 @@ public class InterventionsTableviewController implements Initializable {
 
         liste_des_interventions = ModelQueries.getInterventionsFromApi();
 
-            // Afficher les objets Personne
-            for (Intervention p : liste_des_interventions) {
-                System.out.println(p);
-            }
+        // Afficher les objets Personne
+        for (Intervention p : liste_des_interventions) {
+            System.out.println(p);
+        }
 
-            //mise en correspondance de la colonne "motifCol" du tableview
-            //avec la propriété "motif" de la salle de la classe Intervention
-            motifCol.setCellValueFactory(cell -> cell.getValue().motifProperty());
+        //mise en correspondance de la colonne "dateCol" du tableview
+        //avec la propriété "date" de la salle de la classe Intervention
+        dateCol.setCellValueFactory(cell -> cell.getValue().getDateProperty());
+        //mise en correspondance de la colonne "motifCol" du tableview
+        //avec la propriété "motif" de la salle de la classe Intervention
+        motifCol.setCellValueFactory(cell -> cell.getValue().motifProperty());
 
-            //mise en correspondance de la colonne "salleCol" du tableview
-            //avec la propriété "nom" de la salle de la classe Intervention
-            salleCol.setCellValueFactory(cell -> cell.getValue().getSalle().nomProperty());
+        //mise en correspondance de la colonne "salleCol" du tableview
+        //avec la propriété "nom" de la salle de la classe Intervention
+        salleCol.setCellValueFactory(cell -> cell.getValue().getSalle().nomProperty());
 
-            //mise en correspondance de la colonne "intervenantCol" du tableview
-            //avec la concaténation "prénom nom" de l'intervenant de la classe Intervention
-            intervenantCol.setCellValueFactory(cell -> cell.getValue().getIntervenant().prenomProperty().concat(" ").concat(cell.getValue().getIntervenant().nomProperty()));
+        //mise en correspondance de la colonne "intervenantCol" du tableview
+        //avec la concaténation "prénom nom" de l'intervenant de la classe Intervention
+        intervenantCol.setCellValueFactory(cell -> cell.getValue().getIntervenant().prenomProperty().concat(" ").concat(cell.getValue().getIntervenant().nomProperty()));
 
-            //mise en correspondance de la colonne "contactcol" du tableview
-            //avec la propriété "telephone" de l'intervention de la classe Intervention
-            contactCol.setCellValueFactory(cell -> cell.getValue().getIntervenant().telephoneProperty());
+        //mise en correspondance de la colonne "contactcol" du tableview
+        //avec la propriété "telephone" de l'intervention de la classe Intervention
+        contactCol.setCellValueFactory(cell -> cell.getValue().getIntervenant().telephoneProperty());
 
-            //création de la liste qui correspondra au contenu
-            //du tableview
-            donnees_interventions = FXCollections.observableList(liste_des_interventions);
-            //mise en correspondance de la liste "donneesIntJour"
-            //avec le tableview "todayInt"
-            tableviewInterventions.setItems(donnees_interventions);
+        //création de la liste qui correspondra au contenu
+        //du tableview
+        donnees_interventions = FXCollections.observableList(liste_des_interventions);
+        //mise en correspondance de la liste "donneesIntJour"
+        //avec le tableview "todayInt"
+        tableviewInterventions.setItems(donnees_interventions);
 
 
     }

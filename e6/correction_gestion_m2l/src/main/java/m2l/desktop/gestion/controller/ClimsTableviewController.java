@@ -94,6 +94,12 @@ public class ClimsTableviewController implements Initializable {
             //avec la concaténation "prénom nom" de l'intervenant de la classe Intervention
             batimentCol.setCellValueFactory(cell -> cell.getValue().getSalle().batimentProperty());
 
+            /**** SITUATTION PROFESSIONNELLE C ****/
+            surface_maxCol.setCellValueFactory(new PropertyValueFactory<Climatiseur, Number>("surface_max"));
+            surface_minCol.setCellValueFactory(new PropertyValueFactory<Climatiseur, Number>("surface_min"));
+            puissanceCol.setCellValueFactory(new PropertyValueFactory<Climatiseur, Number>("puissance"));
+            /*************************************/
+
             //création de la liste qui correspondra au contenu
             //du tableview
             donnees_climatiseurs = FXCollections.observableList(liste_des_climatiseurs);

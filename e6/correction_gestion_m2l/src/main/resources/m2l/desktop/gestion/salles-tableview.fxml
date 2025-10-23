@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+
+
+<!--
+/****************************** SITUATION PROFESSIONNELLE  A ******************************
+
+ Nom du projet : Gestion M2L
+
+ Nom du package : m2l.desktop.gestion.controller
+
+ Fichier : SallesTableviewController.java
+
+ Date : Juin 2024
+
+ Auteur : Equipe M2L
+
+ Description : Controller pour la vue affichant les salles dans un TableView.
+
+ **************************************************************************************************/
+ -->
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="m2l.desktop.gestion.controller.SallesTableviewController">
+    <children>
+
+        <VBox stylesheets="style.css">
+
+            <HBox style="fx-background-color:black" alignment="CENTER">
+                <Label fx:id="dateJour" minHeight="16" minWidth="100" prefHeight="100.0"
+                       text="Les salles"
+                       style="-fx-font-size:20; -fx-font-family:Impact; -fx-text-fill:black;"
+                />
+            </HBox>
+
+
+            <TableView fx:id="tableviewSalles" layoutX="59.0" layoutY="55.0" prefHeight="500.0" prefWidth="200.0">
+                <columns>
+                    <TableColumn fx:id="nomCol" prefWidth="150.0" text="Nom"/>
+                    <TableColumn fx:id="capaciteCol"  styleClass="colonne_centree" prefWidth="150" text="Capacité"/>
+                    <TableColumn fx:id="equipementsCol" text="Equipements"/>
+                    <TableColumn fx:id="batimentCol"  styleClass="colonne_centree" prefWidth="150.0" text="Bâtiment"/>
+                </columns>
+            </TableView>
+
+
+            <HBox spacing="100" alignment="CENTER"  minWidth="100" prefHeight="100.0" >
+
+                <ImageView accessibleText="Ajouter une intervention" fitWidth="40"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@images/add.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView  fitWidth="40" preserveRatio="true">
+                    <image>
+                        <Image url="@images/remove.png" />
+                    </image>
+                </ImageView>
+
+            </HBox>
+        </VBox>
+    </children>
+</VBox>

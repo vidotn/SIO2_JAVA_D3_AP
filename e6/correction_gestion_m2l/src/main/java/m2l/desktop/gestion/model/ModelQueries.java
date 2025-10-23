@@ -3,17 +3,16 @@ package m2l.desktop.gestion.model;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
+import java.io.OutputStream;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModelQueries {
 
     // URL de l'API à modifier pour correspondre à votre API
-    private static String API_URL = "http://localhost:8080/SIO2/laravel/e6/site_m2l_12.4/public/api/";
+    private static String API_URL = "http://localhost:8080/SIO2/laravel/e6/correction_site_m2l_12.4/public/api/";
 
 
     /************************************  INTERVENTIONS  ****************************************/
@@ -35,6 +34,8 @@ public class ModelQueries {
 
             String jsonResponse = Tools.convertInputStreamToString(conn.getInputStream());
 
+            System.out.println("ModelQueries : JSON Response : " + jsonResponse);
+
             liste_des_interventions = Tools.InterventionsJSonToList(jsonResponse);
         } else {
             System.out.println("ModelQueries : Failed : HTTP error code : "
@@ -44,6 +45,52 @@ public class ModelQueries {
         return liste_des_interventions;
     }
 
+    public static void updateInterventionViaApi(Intervention interventionSelectionnee) {
+
+        try {
+
+            String apiUrl = API_URL + "interventions/" +interventionSelectionnee.getId_intervention();
+
+
+            System.out.println("Modification de l'intervention n°" + interventionSelectionnee + " via l'API..."+apiUrl);
+
+            URL url = new URL(apiUrl);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("PUT");
+            //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setDoOutput(true);
+
+            String jsonInputString = new Gson().toJson(interventionSelectionnee);
+            try (java.io.OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+          /*  String param1 = URLEncoder.encode(interventionSelectionnee.getMotif(), StandardCharsets.UTF_8.toString());
+            String formData = "motif=" + param1;
+
+            // Écrire les données dans le corps de la requête
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = formData.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+*/
+            int responseCode = conn.getResponseCode();
+
+            System.out.println("Response Code : " + responseCode);
+
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     /************************************  SALLES  ****************************************/
     public static List<Salle> getSallesFromApi() {
@@ -110,6 +157,7 @@ public class ModelQueries {
 
             }
 
+            conn.disconnect();
         } catch (ProtocolException e) {
             throw new RuntimeException(e);
         } catch (MalformedURLException e) {
@@ -178,8 +226,7 @@ public class ModelQueries {
         }
     }
 
-    public static void updateClimatiseur(Climatiseur c) throws IOException
-    {
+    public static void updateClimatiseur(Climatiseur c) throws IOException {
         try {
             String apiUrl = API_URL + "climatiseurs/" + c.getId();
 
@@ -197,12 +244,12 @@ public class ModelQueries {
                 e.printStackTrace();
             }
 
-              int responseCode = conn.getResponseCode();
+            int responseCode = conn.getResponseCode();
 
-              System.out.println("Response Code : " + responseCode);
+            System.out.println("Response Code : " + responseCode);
 
             conn.disconnect();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -222,11 +269,13 @@ public class ModelQueries {
             int responseCode = conn.getResponseCode();
 
             System.out.println("Response Code : " + responseCode);
-
             conn.disconnect();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
+
+
 }

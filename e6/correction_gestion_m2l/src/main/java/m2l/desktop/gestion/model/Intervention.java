@@ -5,13 +5,15 @@
  */
 package m2l.desktop.gestion.model;
 
-//import java.sql.Date;
+//import java.sql.Date ;
 
 import com.google.gson.annotations.Expose;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
@@ -22,23 +24,26 @@ public class Intervention {
     private int id_intervention;
     private int numSalle;
     private int numIntervenant;
-    private Date date;
-    private String heure;
+    private LocalDateTime date_heure ;
     private String motif;
 
     private Intervenant intervenant;
 
     private Salle salle;
 
-    public Intervention(int id_intervention, String motif, Date date, String heure, int numIntervenant, int numSalle, Salle salle, Intervenant intervenant) {
+    public Intervention(int id_intervention, String motif, LocalDateTime  date ,int numIntervenant, int numSalle, Salle salle, Intervenant intervenant) {
         this.id_intervention = id_intervention;
         this.motif = motif;
-        this.date = date;
-        this.heure = heure;
+        this.date_heure  = date ;
         this.numIntervenant = numIntervenant;
         this.numSalle = numSalle;
         this.salle = salle;
         this.intervenant = intervenant;
+
+    }
+
+    public Intervention(String motif) {
+        this.motif = motif;
     }
 
     public int getId_intervention() {
@@ -65,20 +70,12 @@ public class Intervention {
         this.numIntervenant = numIntervenant;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDateTime getDate_heure() {
+        return date_heure;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getHeure() {
-        return heure;
-    }
-
-    public void setHeure(String heure) {
-        this.heure = heure;
+    public void setDate_heure(LocalDateTime date_heure) {
+        this.date_heure = date_heure;
     }
 
     public String getMotif() {
@@ -106,7 +103,7 @@ public class Intervention {
     }
 
     public String toString() {
-        return "Intervention n°" + this.id_intervention + " le " + this.date + " à " + this.heure + " pour le motif : " + this.motif +
+        return "Intervention n°" + this.id_intervention + " le " + this.date_heure  + " pour le motif : " + this.motif +
                 "\n-- " + this.salle.toString() + "\n-- " + this.intervenant.toString();
     }
 
@@ -114,17 +111,13 @@ public class Intervention {
     //Les propriétés pour la TableView
     public SimpleStringProperty getDateProperty() {
 
-        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String la_date = f.format(this.date);
+    //  SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+      //String la_Date  = f.format(this.date_heure );
 
-        return new SimpleStringProperty(la_date);
+        return new SimpleStringProperty(date_heure .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
     }
 
-    public SimpleStringProperty getHeureProperty() {
 
-        return new SimpleStringProperty(this.heure);
-
-    }
 
     public SimpleStringProperty getMotifProperty() {
 
