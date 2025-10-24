@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<?import javafx.scene.layout.HBox?>
+
+
+<?import javafx.scene.control.TextArea?>
+
+<AnchorPane id="pane" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/style.css" styleClass="bg" fx:controller="sio.d3.javafx.exemples.HelloController">
+    <children>
+        <Label fx:id="nbheures" AnchorPane.topAnchor="120" AnchorPane.leftAnchor="320" prefWidth="100" prefHeight="20" text="Nombre d'heures"/>
+        <TextArea fx:id="nbh_val" AnchorPane.topAnchor="150" AnchorPane.leftAnchor="325" prefWidth="80" prefHeight="15"/>
+
+        <Label fx:id="salaire_horaire" AnchorPane.topAnchor="120" AnchorPane.rightAnchor="80" prefWidth="100" prefHeight="20" text="Salaire horaire"/>
+        <TextArea fx:id="sh_val" AnchorPane.topAnchor="150" AnchorPane.rightAnchor="100" prefWidth="80" prefHeight="15"/>
+
+        <Button onAction="#onHelloButtonClick" fx:id="calculbut" AnchorPane.leftAnchor="375" AnchorPane.bottomAnchor="150" prefWidth="120" text="Calculer"/>
+        <Button onMouseClicked="#eraseField" fx:id="erase" AnchorPane.leftAnchor="500" AnchorPane.bottomAnchor="150" prefWidth="120" text="Réinitiliser"/>
+
+        <Label fx:id="resultat" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="320" prefWidth="450" prefHeight="50" text="resultat ici"/>
+    </children>
+</AnchorPane>
+
+<!--<HBox xmlns:fx="http://javafx.com/fxml" id= "pane">
+
+    <children>
+
+        <ImageView fx:id="triangle" >
+            <image>
+                <Image url="@images/triangle.png" />
+            </image>
+        </ImageView>
+
+        <ImageView fx:id="coeur">
+            <image>
+                <Image url="@images/coeur.png"/>
+            </image>
+        </ImageView>
+
+
+        <ImageView fx:id="mario">
+            <image>
+                <Image url="@images/mario.png"/>
+            </image>
+        </ImageView>
+
+    </children>
+</HBox>
+-->
+<!--
+<VBox xmlns:fx="http://javafx.com/fxml" id= "pane">
+
+<children>
+
+
+    <ImageView fx:id="triangle" >
+        <image>
+            <Image url="@images/triangle.png" />
+        </image>
+    </ImageView>
+
+    <ImageView fx:id="coeur">
+        <image>
+            <Image url="@images/coeur.png"/>
+        </image>
+    </ImageView>
+
+
+    <ImageView fx:id="mario">
+        <image>
+            <Image url="@images/mario.png"/>
+        </image>
+    </ImageView>
+
+
+</children>
+</VBox>-->
+<!--
+<StackPane xmlns:fx="http://javafx.com/fxml" id= "pane">
+    <children>
+
+
+        <ImageView fx:id="lune"  fitWidth="1280" fitHeight="960">
+            <image>
+                <Image url="@images/lune.png" />
+            </image>
+        </ImageView>
+
+        <ImageView fx:id="coeur">
+            <image>
+                <Image url="@images/coeur.png"/>
+            </image>
+        </ImageView>
+
+
+        <ImageView fx:id="mario">
+            <image>
+                <Image url="@images/mario.png"/>
+            </image>
+        </ImageView>
+
+
+    </children>
+</StackPane>-->
+
+<!--<BorderPane xmlns:fx="http://javafx.com/fxml" id= "pane" style="-fx-border-color: black; -fx-border-width: 1px;">
+<top>
+    <ImageView fx:id="nuage">
+        <image>
+            <Image url="@images/nuage.jpg"/>
+        </image>
+    </ImageView>
+</top>
+
+<right>
+    <ImageView fx:id="cadeau">
+        <image>
+            <Image url="@images/cadeau.png"/>
+        </image>
+    </ImageView>
+
+</right>
+
+<left>
+    <ImageView fx:id="mario">
+        <image>
+            <Image url="@images/mario.png"/>
+        </image>
+    </ImageView>
+</left>
+
+<center>
+
+    <ImageView fx:id="lune">
+        <image>
+            <Image url="@images/lune.png"/>
+        </image>
+    </ImageView>
+
+
+</center>
+
+<bottom>
+
+
+    <ImageView fx:id="coeur">
+        <image>
+            <Image url="@images/coeur.png"/>
+        </image>
+    </ImageView>
+</bottom>
+</BorderPane>-->
+
+
+        <!--
+        <AnchorPane id="pane" xmlns:fx="http://javafx.com/fxml">
+            <children>
+                <ImageView fx:id="nuage" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" >
+                    <image>
+                        <Image url="@images/nuage.jpg"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="triangle" AnchorPane.rightAnchor="300" AnchorPane.topAnchor="50">
+                    <image>
+                        <Image url="@images/triangle.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="cadeau" AnchorPane.rightAnchor="1000" AnchorPane.topAnchor="500" >
+                    <image>
+                        <Image url="@images/cadeau.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="mario" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" >
+                    <image>
+                        <Image url="@images/mario.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="lune" AnchorPane.leftAnchor="750" AnchorPane.bottomAnchor="550" >
+                    <image>
+                        <Image url="@images/lune.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="coeur" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="900" >
+                    <image>
+                        <Image url="@images/coeur.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+
+        -->
+        <!--
+        <AnchorPane id="pane" xmlns:fx="http://javafx.com/fxml">
+            <children>
+                <ImageView fx:id="nuage" layoutX="0" layoutY="0" >
+                <image>
+                    <Image url="@images/nuage.jpg"/>
+                </image>
+                </ImageView>
+
+                <ImageView fx:id="triangle" layoutX="50" layoutY="50" >
+                    <image>
+                        <Image url="@images/triangle.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="cadeau" layoutX="1100" layoutY="0" >
+                    <image>
+                        <Image url="@images/cadeau.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="mario" layoutX="900" layoutY="150" >
+                    <image>
+                        <Image url="@images/mario.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="lune" layoutX="300" layoutY="300" >
+                    <image>
+                        <Image url="@images/lune.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="coeur" layoutX="0" layoutY="500" >
+                    <image>
+                        <Image url="@images/coeur.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>-->
+
+        <!--
+        <VBox alignment="CENTER" spacing="20.0"  xmlns:fx="http://javafx.com/fxml"
+              fx:controller="exemples.sio.d3.javafx.climatiseurs.HelloController">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+
+            <Label fx:id="welcomeText"/>
+            <Button text="Hello!" onAction="#onHelloButtonClick"/>
+        </VBox>
+        -->

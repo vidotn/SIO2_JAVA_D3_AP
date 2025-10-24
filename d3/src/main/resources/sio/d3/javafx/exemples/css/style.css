@@ -1,0 +1,7 @@
+.bg{
+    -fx-background-image: url('../images/fond.jpg');
+}
+
+.label{
+    -fx-text-fill: #FFFFFF;
+}
